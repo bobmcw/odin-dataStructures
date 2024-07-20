@@ -17,6 +17,15 @@
     goToNextNode(this.head)
     }
   }
+  prepend(value){
+    if (this.head === null) {this.head = new Node(value)}
+    else{
+    const temp = this.head
+    this.head = new Node(value)
+    this.head.nextNode = temp
+    }
+
+  }
    toString(){
     if (this.head === null){
         console.log("list is empty")
@@ -52,5 +61,6 @@ myList = new LinkedList
 myList.append('cat')
 myList.append('dog')
 myList.append('cow')
+myList.prepend('horse')
 myList.toString()
 

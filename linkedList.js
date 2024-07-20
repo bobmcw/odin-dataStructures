@@ -47,7 +47,7 @@
    } 
    print(this.head)
   }
-  size(){
+  getSize(){
     if (this.head === null){return 0}
    function findSize(node, current=0){
     if(node.nextNode === null){
@@ -58,6 +58,16 @@
     return findSize(node.nextNode,current)
    } 
    return findSize(this.head)
+  }
+  getHead(){
+    return this.head.value
+  }
+  getTail(){
+    function findLast(node){
+        if (node.nextNode === null){return node.value}
+        return findLast(node.nextNode)
+    }
+    return findLast(this.head)
   }
 }
 class Node {
@@ -75,5 +85,7 @@ myList.append('dog')
 myList.append('cow')
 myList.prepend('horse')
 myList.toString()
-console.log(myList.size())
+console.log(myList.getHead())
+console.log(myList.getTail())
+console.log(myList.getSize())
 

@@ -47,6 +47,18 @@
    } 
    print(this.head)
   }
+  size(){
+    if (this.head === null){return 0}
+   function findSize(node, current=0){
+    if(node.nextNode === null){
+        current += 1
+        return current
+    } 
+    current += 1
+    return findSize(node.nextNode,current)
+   } 
+   return findSize(this.head)
+  }
 }
 class Node {
   constructor(value) {
@@ -63,4 +75,5 @@ myList.append('dog')
 myList.append('cow')
 myList.prepend('horse')
 myList.toString()
+console.log(myList.size())
 

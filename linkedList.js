@@ -22,14 +22,18 @@
         console.log("list is empty")
         return
     }
-   function print(node){
+   function print(node, stringrep = ""){
         if (node.nextNode === null){
-            console.log(node.value)
+            stringrep = stringrep + ' -> ' + node.value
+            console.log(stringrep)
             return
         }
         else{
-            console.log(node.value)
-            print(node.nextNode)
+            if (stringrep === "") {stringrep = node.value}
+            else{
+            stringrep = stringrep + ' -> ' + node.value
+            }
+            print(node.nextNode, stringrep)
         }
    } 
    print(this.head)

@@ -69,6 +69,17 @@
     }
     return findLast(this.head)
   }
+  getAtIndex(index){
+    if (index > this.getSize()){throw new Error("index out of range")}
+    function find(node, current=0){
+        if (current === index){
+            return node.value
+        }
+        current+= 1
+        return find(node.nextNode,current)
+    }
+    return find(this.head)
+  }
 }
 class Node {
   constructor(value) {
@@ -88,4 +99,5 @@ myList.toString()
 console.log(myList.getHead())
 console.log(myList.getTail())
 console.log(myList.getSize())
+console.log(myList.getAtIndex(2))
 

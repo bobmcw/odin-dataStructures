@@ -80,6 +80,15 @@
     }
     return find(this.head)
   }
+  pop(){
+    if(this.head.nextNode === null){this.head = null}
+    function findSecondToLast(node,previous=null){
+        if (node.nextNode === null){return previous}
+        return findSecondToLast(node.nextNode,node)
+    }
+    const newLast = findSecondToLast(this.head)
+    newLast.nextNode = null
+  }
 }
 class Node {
   constructor(value) {
@@ -100,4 +109,6 @@ console.log(myList.getHead())
 console.log(myList.getTail())
 console.log(myList.getSize())
 console.log(myList.getAtIndex(2))
+myList.pop()
+myList.toString()
 

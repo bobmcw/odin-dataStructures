@@ -89,6 +89,16 @@
     const newLast = findSecondToLast(this.head)
     newLast.nextNode = null
   }
+  contains(value){
+    function isValue(node){
+        if(node.value === value){return true}
+        else if(node.nextNode === null){return false}
+        else{
+        return isValue(node.nextNode)
+        }
+    }
+    return isValue(this.head)
+  }
 }
 class Node {
   constructor(value) {
@@ -111,4 +121,6 @@ console.log(myList.getSize())
 console.log(myList.getAtIndex(2))
 myList.pop()
 myList.toString()
+console.log(myList.contains('dog'))
+console.log(myList.contains('siema'))
 

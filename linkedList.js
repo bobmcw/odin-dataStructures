@@ -149,9 +149,9 @@ class LinkedList {
       }
       goToIndex(this.head)
     }
-    removeAt(index,value){
+    removeAt(index){
         if(index === 0){
-            this.head.nextNode = this.head
+            this.head = this.head.nextNode
             return
         }
         function goToIndex(node,previous=null,current=0){
@@ -192,3 +192,5 @@ console.log(myList.contains("siema"));
 console.log(myList.find("dog"));
 myList.insertAt(1, "turtle");
 myList.toString();
+myList.removeAt(3)
+myList.toString()

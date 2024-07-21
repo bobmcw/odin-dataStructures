@@ -140,6 +140,7 @@ class LinkedList {
         const inserted = new Node(value);
         inserted.nextNode = node;
         previous.nextNode = inserted;
+        return
       } else if (node.nextNode === null) {
             this.append(value)
             return
@@ -147,6 +148,23 @@ class LinkedList {
         goToIndex(node.nextNode, node, current + 1);
       }
       goToIndex(this.head)
+    }
+    removeAt(index,value){
+        if(index === 0){
+            this.head.nextNode = this.head
+            return
+        }
+        function goToIndex(node,previous=null,current=0){
+            if(current === index){
+                previous.nextNode = node.nextNode
+                return
+            }
+            else if(node.nextNode === null){
+                throw new Error("index out of range")
+            }
+            goToIndex(node.nextNode,node,current+1)
+        }
+        goToIndex(this.head)
     }
   }
 
@@ -172,5 +190,5 @@ myList.toString();
 console.log(myList.contains("dog"));
 console.log(myList.contains("siema"));
 console.log(myList.find("dog"));
-myList.insertAt(100, "turtle");
+myList.insertAt(1, "turtle");
 myList.toString();

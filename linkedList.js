@@ -90,6 +90,7 @@
     newLast.nextNode = null
   }
   contains(value){
+    if(this.head===null){return false}
     function isValue(node){
         if(node.value === value){return true}
         else if(node.nextNode === null){return false}
@@ -100,6 +101,7 @@
     return isValue(this.head)
   }
   find(value){
+    if (this.head===null){return null}
     function helper(node,index=0){
         if(node.value === value){return index}
         if(node.nextNode === null){return null}

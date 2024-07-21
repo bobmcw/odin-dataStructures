@@ -99,6 +99,14 @@
     }
     return isValue(this.head)
   }
+  find(value){
+    function helper(node,index=0){
+        if(node.value === value){return index}
+        if(node.nextNode === null){return null}
+        return helper(node.nextNode,index+1)
+    }
+    return helper(this.head)
+  }
 }
 class Node {
   constructor(value) {
@@ -123,4 +131,5 @@ myList.pop()
 myList.toString()
 console.log(myList.contains('dog'))
 console.log(myList.contains('siema'))
+console.log(myList.find('dog'))
 

@@ -32,6 +32,11 @@ module.exports = class LinkedList {
       return;
     }
     function print(node, stringrep = "") {
+        if(node.nextNode === null && stringrep === ""){
+            stringrep = node.value
+            console.log(stringrep)
+            return
+        }
       if (node.nextNode === null) {
         stringrep = stringrep + " -> " + node.value;
         console.log(stringrep);

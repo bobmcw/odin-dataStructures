@@ -22,6 +22,9 @@ class hashmap {
   }
   set(key, value) {
     const hashed = this.hash(key) % this.capacity
+    if (hashed < 0 || hashed >= buckets.length) {
+        throw new Error("Trying to access index out of bound");
+      }
     if (this.buckets[hashed] === undefined){
         this.buckets[hashed] = new LinkedList()
         this.buckets[hashed].append([key,value])

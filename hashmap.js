@@ -30,6 +30,10 @@ class hashmap {
         this.buckets[hashed].append([key,value])
         this.buckets[hashed].toString()
     }
+    else{
+        this.buckets[hashed].append([key,value])
+        this.buckets[hashed].toString()
+    }
     this.grow()    
   }
 }

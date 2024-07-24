@@ -5,8 +5,19 @@ class hashmap {
     this.buckets = [];
     this.capacity = capacity;
   }
-  grow() {
-    if (this.capacity * this.load_factor <= this.buckets.length) {
+  //length as in how many buckets contain a value, not how many values are stored in the hashmap
+  #length(){
+    let len = 0
+    this.buckets.forEach(bucket => {
+      if (bucket !== undefined) {
+        len +=1
+      }
+    });
+    return len
+  }
+  #grow() {
+    console.log(`grow: ${this.capacity*this.load_factor}, bucket length: ${this.#length()}`)
+    if (this.capacity * this.load_factor <= this.#length()) {
       this.capacity = this.capacity * 2;
     }
   }
@@ -34,7 +45,7 @@ class hashmap {
         this.buckets[hashed].append([key,value])
         this.buckets[hashed].toString()
     }
-    this.grow()    
+    this.#grow()    
   }
 }
 myHashMap = new hashmap(0.75);
@@ -50,5 +61,9 @@ myHashMap.set('banana', 'yellow')
  myHashMap.set('jacket', 'blue')
  myHashMap.set('kite', 'pink')
  myHashMap.set('lion', 'golden')
+ myHashMap.set('cup', 'glass')
+ myHashMap.set('plant', 'green')
+ myHashMap.set('bottle', 'white')
+ myHashMap.set('window', 'glass')
 console.log(myHashMap.buckets)
 console.log(myHashMap.capacity)

@@ -171,18 +171,6 @@ module.exports = class LinkedList {
         }
         goToIndex(this.head)
     }
-    toArray(){
-        const arr = []
-        function helper(node){
-            if(node.nextNode === null){
-                arr.push(node.value)
-                return arr
-            }
-            arr.push(node.value)
-            return helper(node.nextNode)
-        }
-        return helper(this.head)
-    }
   }
 
 class Node {

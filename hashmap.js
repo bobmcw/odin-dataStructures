@@ -40,7 +40,6 @@ class hashmap {
         this.buckets[hashed].append({'key':key,'value':value})
         return
     }
-    //figure out a way to find if a key is in a linked list
     else{
         for(let i =0;i<=this.buckets[hashed].getSize()-1;i++){
             if(this.buckets[hashed].getAtIndex(i).key === key){
@@ -53,6 +52,15 @@ class hashmap {
         this.buckets[hashed].append({'key':key,'value':value})
         this.buckets[hashed].toString()
         this.#grow()    
+  }
+  get(key){
+    const hashed = this.hash(key) % this.capacity
+    for(let i=0;i<=this.buckets[hashed].getSize();i++){
+        if(this.buckets[hashed].getAtIndex(i).key === key){
+            return this.buckets[hashed].getAtIndex(i).value
+        }
+    return null
+    }
   }
 }
 myHashMap = new hashmap(0.75);
@@ -77,3 +85,4 @@ myHashMap.set('banana', 'yellow')
  myHashMap.buckets.forEach(element => {
     element.toString() 
  });
+ console.log(myHashMap.get('apple'))

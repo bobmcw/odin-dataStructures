@@ -22,7 +22,7 @@ class hashmap {
   }
   set(key, value) {
     const hashed = this.hash(key) % this.capacity
-    if (hashed < 0 || hashed >= buckets.length) {
+    if (hashed < 0 || hashed >= this.capacity) {
         throw new Error("Trying to access index out of bound");
       }
     if (this.buckets[hashed] === undefined){
@@ -39,3 +39,16 @@ class hashmap {
 }
 myHashMap = new hashmap(0.75);
 myHashMap.set('apple', 'red')
+myHashMap.set('banana', 'yellow')
+ myHashMap.set('carrot', 'orange')
+ myHashMap.set('dog', 'brown')
+ myHashMap.set('elephant', 'gray')
+ myHashMap.set('frog', 'green')
+ myHashMap.set('grape', 'purple')
+ myHashMap.set('hat', 'black')
+ myHashMap.set('ice cream', 'white')
+ myHashMap.set('jacket', 'blue')
+ myHashMap.set('kite', 'pink')
+ myHashMap.set('lion', 'golden')
+console.log(myHashMap.buckets)
+console.log(myHashMap.capacity)

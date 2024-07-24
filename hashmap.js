@@ -16,7 +16,6 @@ class hashmap {
     return len
   }
   #grow() {
-    console.log(`grow: ${this.capacity*this.load_factor}, bucket length: ${this.#length()}`)
     if (this.capacity * this.load_factor <= this.#length()) {
       this.capacity = this.capacity * 2;
     }
@@ -38,14 +37,22 @@ class hashmap {
       }
     if (this.buckets[hashed] === undefined){
         this.buckets[hashed] = new LinkedList()
-        this.buckets[hashed].append([key,value])
-        this.buckets[hashed].toString()
+        this.buckets[hashed].append({'key':key,'value':value})
+        return
     }
+    //figure out a way to find if a key is in a linked list
     else{
-        this.buckets[hashed].append([key,value])
-        this.buckets[hashed].toString()
+        for(let i =0;i<=this.buckets[hashed].getSize()-1;i++){
+            if(this.buckets[hashed].getAtIndex(i).key === key){
+                this.buckets[hashed].removeAt(i)
+                this.buckets[hashed].insertAt(i,{'key':key,'value':value})
+                return
+            }
+        }
     }
-    this.#grow()    
+        this.buckets[hashed].append({'key':key,'value':value})
+        this.buckets[hashed].toString()
+        this.#grow()    
   }
 }
 myHashMap = new hashmap(0.75);
@@ -65,5 +72,8 @@ myHashMap.set('banana', 'yellow')
  myHashMap.set('plant', 'green')
  myHashMap.set('bottle', 'white')
  myHashMap.set('window', 'glass')
-console.log(myHashMap.buckets)
-console.log(myHashMap.capacity)
+ myHashMap.set('apple','blue')
+
+ myHashMap.buckets.forEach(element => {
+    element.toString() 
+ });

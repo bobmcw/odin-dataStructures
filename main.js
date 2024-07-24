@@ -18,3 +18,4 @@ myList.insertAt(1, "turtle");
 myList.toString();
 myList.removeAt(3)
 myList.toString()
+console.log(myList.toArray())

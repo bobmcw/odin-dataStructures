@@ -10,14 +10,29 @@ class hashmap {
     let len = 0
     this.buckets.forEach(bucket => {
       if (bucket !== undefined) {
-        len +=1
+      len += bucket.getSize()
       }
     });
     return len
   }
   #grow() {
+    //grow should create a new array of buckets instead of just changing the 
+    //capacity value because all hashes should be recomputed or else they don't match
+    console.log(`${this.capacity * this.load_factor} ${this.#length()}`)
     if (this.capacity * this.load_factor <= this.#length()) {
-      this.capacity = this.capacity * 2;
+      const newMap = new hashmap(0.75,this.capacity*2)
+      this.buckets.forEach(element => {
+        for(let i=0;i<=element.getSize()-1;i++){
+          const obj = element.getAtIndex(i)
+          newMap.set(obj.key,obj.value)
+        }
+      });
+      console.log('new hashmap:')
+      newMap.buckets.forEach(element => {
+        console.log(element)
+      });
+      this.buckets = newMap.buckets
+      this.capacity = newMap.capacity
     }
   }
   hash(key) {
@@ -32,34 +47,49 @@ class hashmap {
   }
   set(key, value) {
     const hashed = this.hash(key) % this.capacity
+    //restrict accessing array out of capacity range
     if (hashed < 0 || hashed >= this.capacity) {
         throw new Error("Trying to access index out of bound");
       }
+      //inserting into an empty bucket
     if (this.buckets[hashed] === undefined){
         this.buckets[hashed] = new LinkedList()
         this.buckets[hashed].append({'key':key,'value':value})
+        this.#grow()
         return
     }
+    //inserting into a non-empty bucket
     else{
         for(let i =0;i<=this.buckets[hashed].getSize()-1;i++){
             if(this.buckets[hashed].getAtIndex(i).key === key){
                 this.buckets[hashed].removeAt(i)
                 this.buckets[hashed].insertAt(i,{'key':key,'value':value})
+                this.#grow()
                 return
             }
         }
     }
         this.buckets[hashed].append({'key':key,'value':value})
-        this.buckets[hashed].toString()
+        //this.buckets[hashed].toString()
         this.#grow()    
   }
   get(key){
     const hashed = this.hash(key) % this.capacity
     for(let i=0;i<=this.buckets[hashed].getSize();i++){
+        console.log(this.buckets[hashed].getAtIndex(i))
         if(this.buckets[hashed].getAtIndex(i).key === key){
             return this.buckets[hashed].getAtIndex(i).value
         }
     return null
+    }
+  }
+  has(key){
+    const hashed = this.hash(key) % this.capacity
+    for(let i=0;i<=this.buckets[hashed].getSize();i++){
+        if(this.buckets[hashed].getAtIndex(i).key === key){
+            return true
+        }
+        return false
     }
   }
 }
@@ -82,7 +112,7 @@ myHashMap.set('banana', 'yellow')
  myHashMap.set('window', 'glass')
  myHashMap.set('apple','blue')
 
- myHashMap.buckets.forEach(element => {
-    element.toString() 
- });
- console.log(myHashMap.get('apple'))
+ //myHashMap.buckets.forEach(element => {
+ //   element.toString() 
+ //});
+ console.log(myHashMap.get('cup'))

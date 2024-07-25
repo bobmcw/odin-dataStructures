@@ -75,13 +75,12 @@ class hashmap {
   }
   get(key){
     const hashed = this.hash(key) % this.capacity
-    for(let i=0;i<=this.buckets[hashed].getSize();i++){
-        console.log(this.buckets[hashed].getAtIndex(i))
+    for(let i=0;i<=this.buckets[hashed].getSize()-1;i++){
         if(this.buckets[hashed].getAtIndex(i).key === key){
             return this.buckets[hashed].getAtIndex(i).value
         }
-    return null
     }
+    return null
   }
   has(key){
     const hashed = this.hash(key) % this.capacity
@@ -90,6 +89,18 @@ class hashmap {
             return true
         }
         return false
+    }
+  }
+  remove(key){
+    if(!this.has(key)){
+      return false
+    }
+    const hashed = this.hash(key) % this.capacity
+    for(let i =0;i<=this.buckets[hashed].getSize()-1;i++){
+      if(this.buckets[hashed].getAtIndex(i).key === key){
+        this.buckets[hashed].removeAt(i)
+        return true
+      }
     }
   }
 }
@@ -115,4 +126,5 @@ myHashMap.set('banana', 'yellow')
  //myHashMap.buckets.forEach(element => {
  //   element.toString() 
  //});
- console.log(myHashMap.get('cup'))
+ myHashMap.remove('cup')
+ console.log(myHashMap.get('carrot'))

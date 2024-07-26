@@ -103,6 +103,13 @@ class hashmap {
       }
     }
   }
+  length(){
+    let len = 0
+    this.buckets.forEach(bucket => {
+     len += bucket.getSize() 
+    });
+    return len
+  }
 }
 myHashMap = new hashmap(0.75);
 myHashMap.set('apple', 'red')
@@ -128,3 +135,4 @@ myHashMap.set('banana', 'yellow')
  //});
  myHashMap.remove('cup')
  console.log(myHashMap.get('carrot'))
+ console.log(myHashMap.length())

@@ -113,38 +113,38 @@ class hashmap {
     this.buckets = [];
     this.capacity = 16;
   }
-  keys(){
-    const keyArray = []
-    this.buckets.forEach(bucket => {
-      if(bucket !== undefined){
-      for(let i =0;i<=bucket.getSize()-1;i++){
-        keyArray.push(bucket.getAtIndex(i).key)  
-      }
+  keys() {
+    const keyArray = [];
+    this.buckets.forEach((bucket) => {
+      if (bucket !== undefined) {
+        for (let i = 0; i <= bucket.getSize() - 1; i++) {
+          keyArray.push(bucket.getAtIndex(i).key);
+        }
       }
     });
-    return keyArray
+    return keyArray;
   }
-  values(){
-    const valueArray = []
-    this.buckets.forEach(bucket => {
-      if(bucket !== undefined){
-      for(let i =0;i<=bucket.getSize()-1;i++){
-        valueArray.push(bucket.getAtIndex(i).value)  
-      }
+  values() {
+    const valueArray = [];
+    this.buckets.forEach((bucket) => {
+      if (bucket !== undefined) {
+        for (let i = 0; i <= bucket.getSize() - 1; i++) {
+          valueArray.push(bucket.getAtIndex(i).value);
+        }
       }
     });
-    return valueArray
+    return valueArray;
   }
-  entries(){
-    const entryArray = []
-    this.buckets.forEach(bucket => {
-      if(bucket !== undefined){
-      for(let i =0;i<=bucket.getSize()-1;i++){
-        entryArray.push(bucket.getAtIndex(i))
-      }
+  entries() {
+    const entryArray = [];
+    this.buckets.forEach((bucket) => {
+      if (bucket !== undefined) {
+        for (let i = 0; i <= bucket.getSize() - 1; i++) {
+          entryArray.push(bucket.getAtIndex(i));
+        }
       }
     });
-    return entryArray
+    return entryArray;
   }
 }
 myHashMap = new hashmap(0.75);
@@ -172,6 +172,6 @@ myHashMap.set("apple", "blue");
 myHashMap.remove("cup");
 console.log(myHashMap.get("carrot"));
 console.log(myHashMap.length());
-console.log(myHashMap.keys())
-console.log(myHashMap.values())
-console.log(myHashMap.entries())
+console.log(myHashMap.keys());
+console.log(myHashMap.values());
+console.log(myHashMap.entries());

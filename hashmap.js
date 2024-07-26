@@ -113,6 +113,17 @@ class hashmap {
     this.buckets = [];
     this.capacity = 16;
   }
+  keys(){
+    const keyArray = []
+    this.buckets.forEach(bucket => {
+      if(bucket !== undefined){
+      for(let i =0;i<=bucket.getSize()-1;i++){
+        keyArray.push(bucket.getAtIndex(i).key)  
+      }
+      }
+    });
+    return keyArray
+  }
 }
 myHashMap = new hashmap(0.75);
 myHashMap.set("apple", "red");
@@ -139,3 +150,4 @@ myHashMap.set("apple", "blue");
 myHashMap.remove("cup");
 console.log(myHashMap.get("carrot"));
 console.log(myHashMap.length());
+console.log(myHashMap.keys())

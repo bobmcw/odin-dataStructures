@@ -27,7 +27,6 @@ class hashmap {
           newMap.set(obj.key,obj.value)
         }
       });
-      console.log('new hashmap:')
       newMap.buckets.forEach(element => {
         console.log(element)
       });
@@ -109,6 +108,11 @@ class hashmap {
      len += bucket.getSize() 
     });
     return len
+  }
+  clear(){
+    this.buckets = []
+    this.capacity = 16
+
   }
 }
 myHashMap = new hashmap(0.75);

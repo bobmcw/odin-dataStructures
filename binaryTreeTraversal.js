@@ -7,7 +7,10 @@ class Node {
 }
 class BinaryTree {
   constructor(values) {
-    values.sort();
+    values.sort(function(a,b) {
+        return a-b
+    });
+    console.log(values)
     this.root = this.buildTree(values, 0, values.length - 1);
   }
   buildTree(values, start, end) {

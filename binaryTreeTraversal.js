@@ -7,6 +7,7 @@ class Node{
 }
 class BinaryTree{
     constructor(values){
+        values.sort()
         this.root = this.buildTree(values,0,values.length -1)
     }
     buildTree(values,start,end){
@@ -18,7 +19,7 @@ class BinaryTree{
         return root
     }
 }
-const myTree = new BinaryTree([1,2,3,4,5,6,7,8,9])
+const myTree = new BinaryTree([1,3,5,4,7,8,9])
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
     if (node === null) {

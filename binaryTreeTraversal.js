@@ -131,6 +131,11 @@ class BinaryTree {
     }
   return traverse(this.root)
   }
+  levelOrder(callback){
+    if(typeof(callback !== 'function')){
+        throw new Error('the argument must be a function');
+    }
+  }
 }
 const myTree = new BinaryTree([45, 13, 5, 20, 7, 19, 9]);
 

@@ -91,11 +91,10 @@ class BinaryTree {
                 }
                 return
             }
-        //case 3: node has 2 children
-        
+        //case 3: node has 2 children 
         else if(node.leftChild !== null && node.rightChild !== null){
             function findSuccesor(node,prev=null){                
-                if(prev.rightChild === node){
+                if(prev.rightChild === node && node.leftChild === null){
                     prev.rightChild = null
                     return node.value
                 }
@@ -137,5 +136,5 @@ myTree.insert(0);
 myTree.insert(6);
 prettyPrint(myTree.root);
 console.log('---------------------------')
-myTree.deleteItem(20)
+myTree.deleteItem(13)
 prettyPrint(myTree.root);

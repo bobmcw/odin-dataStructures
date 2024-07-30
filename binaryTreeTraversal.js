@@ -149,6 +149,21 @@ class BinaryTree {
     }
     traverse(this.root)
   }
+  inOrder(callback){
+    if (typeof(callback) !== 'function') {
+      throw new Error("the argument must be a function");
+    }
+    function traverse(node){
+        if(node.leftChild !== null){
+            traverse(node.leftChild)
+        }
+        callback(node)
+        if(node.rightChild !== null){
+            traverse(node.rightChild)
+        }
+    }
+    traverse(this.root)
+  }
 }
 const myTree = new BinaryTree([45, 13, 5, 20, 7, 19, 9]);
 
@@ -169,7 +184,9 @@ myTree.insert(6);
 prettyPrint(myTree.root);
 console.log("---------------------------");
 prettyPrint(myTree.root);
-function foo(element){
-    console.log(`element: ${element.value}`)
-}
-myTree.levelOrder(foo)
+// myTree.levelOrder((element) =>{
+//     console.log(`element: ${element.value}`)
+// })
+myTree.inOrder((element)=>{
+    console.log(element.value)
+})

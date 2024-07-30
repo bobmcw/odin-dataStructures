@@ -7,10 +7,10 @@ class Node {
 }
 class BinaryTree {
   constructor(values) {
-    values.sort(function(a,b) {
-        return a-b
+    values.sort(function (a, b) {
+      return a - b;
     });
-    console.log(values)
+    console.log(values);
     this.root = this.buildTree(values, 0, values.length - 1);
   }
   buildTree(values, start, end) {
@@ -44,97 +44,110 @@ class BinaryTree {
     }
     findWhereToInsert(this.root);
   }
-  deleteItem(value){
-    function del(node,previousNode=null){
-        if(node === null){return}
-        if(value === node.value){
-            //case 1: no children
-            if(node.leftChild === null && node.rightChild === null){
-                if(previousNode.leftChild === node){
-                    previousNode.leftChild = null
-                }
-                else{
-                    previousNode.rightChild = null
-                }
-                return
-            }
-            //case2: one child
-            else if(node.leftChild !== null && node.rightChild === null){
-                node.value = node.leftChild.value
-                if (node.leftChild.rightChild !== null){
-                node.rightChild = node.leftChild.rightChild
-                }
-                else{
-                    node.rightChild = null
-                }
-                if(node.leftChild.leftChild !== null){    
-                node.leftChild = node.leftChild.leftChild
-                }
-                else{
-                    node.leftChild = null
-                }
-                return
-            }
-            else if(node.leftChild === null && node.rightChild !== null){
-                node.value = node.rightChild.value
-                if (node.rightChild.leftChild !== null){
-                node.leftChild = node.rightChild.leftChild
-                }
-                else{
-                    node.rightChild = null
-                }
-                if(node.rightChild.rightChild !== null){    
-                node.rightChild = node.rightChild.rightChild
-                }
-                else{
-                    node.rightChild = null
-                }
-                return
-            }
-        //case 3: node has 2 children 
-        else if(node.leftChild !== null && node.rightChild !== null){
-            function findSuccesor(node,prev=null){                
-                if(prev.rightChild === node && node.leftChild === null){
-                    prev.rightChild = null
-                    return node.value
-                }
-                if(node.leftChild === null){
-                    prev.leftChild = null
-                    return node.value
-                }
-                return findSuccesor(node.leftChild,node)
-            }
-            const newvalue = findSuccesor(node.rightChild,node)
-            node.value = newvalue
+  deleteItem(value) {
+    function del(node, previousNode = null) {
+      if (node === null) {
+        return;
+      }
+      if (value === node.value) {
+        //case 1: no children
+        if (node.leftChild === null && node.rightChild === null) {
+          if (previousNode.leftChild === node) {
+            previousNode.leftChild = null;
+          } else {
+            previousNode.rightChild = null;
+          }
+          return;
         }
+        //case2: one child
+        else if (node.leftChild !== null && node.rightChild === null) {
+          node.value = node.leftChild.value;
+          if (node.leftChild.rightChild !== null) {
+            node.rightChild = node.leftChild.rightChild;
+          } else {
+            node.rightChild = null;
+          }
+          if (node.leftChild.leftChild !== null) {
+            node.leftChild = node.leftChild.leftChild;
+          } else {
+            node.leftChild = null;
+          }
+          return;
+        } else if (node.leftChild === null && node.rightChild !== null) {
+          node.value = node.rightChild.value;
+          if (node.rightChild.leftChild !== null) {
+            node.leftChild = node.rightChild.leftChild;
+          } else {
+            node.rightChild = null;
+          }
+          if (node.rightChild.rightChild !== null) {
+            node.rightChild = node.rightChild.rightChild;
+          } else {
+            node.rightChild = null;
+          }
+          return;
         }
-         else{
-             del(node.leftChild,node)
-             del(node.rightChild,node)
-         }
-        
-
+        //case 3: node has 2 children
+        else if (node.leftChild !== null && node.rightChild !== null) {
+          function findSuccesor(node, prev = null) {
+            if (prev.rightChild === node && node.leftChild === null) {
+              prev.rightChild = null;
+              return node.value;
+            }
+            if (node.leftChild === null) {
+              prev.leftChild = null;
+              return node.value;
+            }
+            return findSuccesor(node.leftChild, node);
+          }
+          const newvalue = findSuccesor(node.rightChild, node);
+          node.value = newvalue;
+        }
+      } else {
+        del(node.leftChild, node);
+        del(node.rightChild, node);
+      }
     }
-    del(this.root)
+    del(this.root);
   }
-  find(value){
-    function traverse(node){
-        if(value === node.value){return node}
-        if(value < node.value){
-            if(node.leftChild === null){return null}
-            return traverse(node.leftChild)
+  find(value) {
+    function traverse(node) {
+      if (value === node.value) {
+        return node;
+      }
+      if (value < node.value) {
+        if (node.leftChild === null) {
+          return null;
         }
-        if(value > node.value){
-            if(node.rightChild === null){return null}
-            return traverse(node.rightChild)
+        return traverse(node.leftChild);
+      }
+      if (value > node.value) {
+        if (node.rightChild === null) {
+          return null;
         }
+        return traverse(node.rightChild);
+      }
     }
-  return traverse(this.root)
+    return traverse(this.root);
   }
-  levelOrder(callback){
-    if(typeof(callback !== 'function')){
-        throw new Error('the argument must be a function');
+  levelOrder(callback) {
+    if (typeof(callback) !== 'function') {
+      throw new Error("the argument must be a function");
     }
+    const queue = [this.root]
+    function traverse(node=null){
+        callback(queue[0])
+        if(queue[0].rightChild !== null){
+            queue.push(node.rightChild)
+        }
+        if(queue[0].leftChild !== null){
+            queue.push(node.leftChild)
+        }
+        queue.shift()
+        if(queue.length === 0){return}
+        traverse(queue[0])
+    }
+    traverse(this.root)
   }
 }
 const myTree = new BinaryTree([45, 13, 5, 20, 7, 19, 9]);
@@ -154,6 +167,9 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 myTree.insert(0);
 myTree.insert(6);
 prettyPrint(myTree.root);
-console.log('---------------------------')
+console.log("---------------------------");
 prettyPrint(myTree.root);
-console.log(myTree.find(7))
+function foo(element){
+    console.log(`element: ${element.value}`)
+}
+myTree.levelOrder(foo)

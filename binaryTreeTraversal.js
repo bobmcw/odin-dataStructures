@@ -117,6 +117,20 @@ class BinaryTree {
     }
     del(this.root)
   }
+  find(value){
+    function traverse(node){
+        if(value === node.value){return node}
+        if(value < node.value){
+            if(node.leftChild === null){return null}
+            return traverse(node.leftChild)
+        }
+        if(value > node.value){
+            if(node.rightChild === null){return null}
+            return traverse(node.rightChild)
+        }
+    }
+  return traverse(this.root)
+  }
 }
 const myTree = new BinaryTree([45, 13, 5, 20, 7, 19, 9]);
 
@@ -136,5 +150,5 @@ myTree.insert(0);
 myTree.insert(6);
 prettyPrint(myTree.root);
 console.log('---------------------------')
-myTree.deleteItem(13)
 prettyPrint(myTree.root);
+console.log(myTree.find(7))

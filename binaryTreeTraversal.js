@@ -194,6 +194,23 @@ class BinaryTree {
     }
     traverse(this.root)
   }
+  //todo
+  height(value){
+    const node = this.find(value)
+    if(node === null){return null}
+    function maxDepth(node){
+        if(node.leftChild === null || node.rightChild === null){return 1}
+        return Math.max(maxDepth(node.leftChild) , maxDepth(node.rightChild)) +1
+    }
+    return maxDepth(node)
+  }
+  //todo
+  depth(node){
+
+  }
+  isBalanced(){
+
+  }
 }
 const myTree = new BinaryTree([45, 13, 5, 20, 7, 19, 9]);
 
@@ -223,3 +240,4 @@ prettyPrint(myTree.root);
 myTree.postOrder((element)=>{
     console.log(element.value)
 })
+console.log(myTree.height(13))

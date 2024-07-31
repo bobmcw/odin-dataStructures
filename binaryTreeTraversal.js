@@ -194,7 +194,6 @@ class BinaryTree {
     }
     traverse(this.root)
   }
-  //todo
   height(value){
     const node = this.find(value)
     if(node === null){return null}
@@ -204,9 +203,15 @@ class BinaryTree {
     }
     return maxDepth(node)
   }
-  //todo
-  depth(node){
-
+  depth(value){
+    const node = this.find(value)
+    if(node === null){return null}
+    function traverse(node,sum=0){
+        if(node.value === value){return sum}
+        if(node.value < value){return traverse(node.rightChild,sum+1)}
+        else if(node.value > value){return traverse(node.leftChild,sum+1)}
+    }
+    return traverse(this.root)
   }
   isBalanced(){
 
@@ -240,4 +245,4 @@ prettyPrint(myTree.root);
 myTree.postOrder((element)=>{
     console.log(element.value)
 })
-console.log(myTree.height(13))
+console.log(myTree.depth(5))

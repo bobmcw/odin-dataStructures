@@ -198,8 +198,22 @@ class BinaryTree {
     const node = this.find(value)
     if(node === null){return null}
     function maxDepth(node){
-        if(node.leftChild === null || node.rightChild === null){return 1}
-        return Math.max(maxDepth(node.leftChild) , maxDepth(node.rightChild)) +1
+        if(node === null){return 0}
+        let left
+        let right
+        if(node.leftChild === null){
+            left = 0
+        } 
+        else{
+            left = maxDepth(node.leftChild)
+        }
+        if(node.rightChild === null){
+            right = 0
+        }
+        else{
+            right = maxDepth(node.rightChild)
+        }
+        return Math.max(maxDepth(node.leftChild) , maxDepth(node.rightChild))+1
     }
     return maxDepth(node)
   }
@@ -214,8 +228,26 @@ class BinaryTree {
     return traverse(this.root)
   }
   isBalanced(){
-
-  }
+    let balanced = true
+    this.levelOrder((element)=>{
+        let left
+        let right
+        if(element.leftChild === null){
+            left = 0
+        }
+        else{
+           left = this.height(element.leftChild.value)
+        }
+        if(element.rightChild === null){
+            right = 0
+        }
+        else{
+            right = this.height(element.rightChild.value)
+        }
+        if(Math.abs(right - left) > 1){balanced = false}
+    })
+    return balanced
+}
 }
 const myTree = new BinaryTree([45, 13, 5, 20, 7, 19, 9]);
 
@@ -234,8 +266,6 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 myTree.insert(0);
 myTree.insert(6);
 prettyPrint(myTree.root);
-console.log("---------------------------");
-prettyPrint(myTree.root);
 // myTree.levelOrder((element) =>{
 //     console.log(`element: ${element.value}`)
 // })
@@ -245,4 +275,10 @@ prettyPrint(myTree.root);
 myTree.postOrder((element)=>{
     console.log(element.value)
 })
-console.log(myTree.depth(5))
+console.log(myTree.isBalanced())
+myTree.insert(100);
+myTree.insert(101);
+myTree.insert(102);
+prettyPrint(myTree.root)
+console.log(myTree.isBalanced())
+console.log(myTree.height(7))

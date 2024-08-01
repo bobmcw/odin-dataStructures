@@ -257,39 +257,3 @@ rebalance(){
     this.root = newTree.root
 }
 }
-const myTree = new BinaryTree([45, 13, 5, 20, 7, 19, 9]);
-
-const prettyPrint = (node, prefix = "", isLeft = true) => {
-  if (node === null) {
-    return;
-  }
-  if (node.rightChild !== null) {
-    prettyPrint(node.rightChild, `${prefix}${isLeft ? "│   " : "    "}`, false);
-  }
-  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
-  if (node.leftChild !== null) {
-    prettyPrint(node.leftChild, `${prefix}${isLeft ? "    " : "│   "}`, true);
-  }
-};
-myTree.insert(0);
-myTree.insert(6);
-prettyPrint(myTree.root);
-// myTree.levelOrder((element) =>{
-//     console.log(`element: ${element.value}`)
-// })
-// myTree.inOrder((element)=>{
-//     console.log(element.value)
-// })
-myTree.postOrder((element)=>{
-    console.log(element.value)
-})
-console.log(myTree.isBalanced())
-myTree.insert(100);
-myTree.insert(101);
-myTree.insert(201);
-prettyPrint(myTree.root)
-console.log(myTree.isBalanced())
-console.log(myTree.height(7))
-myTree.rebalance()
-prettyPrint(myTree.root)
-console.log(myTree.isBalanced())

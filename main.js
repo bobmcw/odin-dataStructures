@@ -1,5 +1,5 @@
 const LinkedList = require('./linkedList.js')
-const LinkedList = require('./binaryTreeTraversal.js')
+const BinaryTree = require('./binaryTreeTraversal.js')
 myList = new LinkedList();
 myList.append("cat");
 myList.append("dog");
@@ -19,7 +19,6 @@ myList.insertAt(1, "turtle");
 myList.toString();
 myList.removeAt(3)
 myList.toString()
-console.log(myList.toArray())
 
 const myTree = new BinaryTree([45, 13, 5, 20, 7, 19, 9]);
 const prettyPrint = (node, prefix = "", isLeft = true) => {

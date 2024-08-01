@@ -5,7 +5,7 @@ class Node {
     this.rightChild = null;
   }
 }
-class BinaryTree {
+module.exports = class BinaryTree {
   constructor(values) {
     values.sort(function (a, b) {
       return a - b;

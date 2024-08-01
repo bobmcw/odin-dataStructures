@@ -1,5 +1,6 @@
 const LinkedList = require('./linkedList.js')
 const BinaryTree = require('./binaryTreeTraversal.js')
+const BinaryTree = require('./hashmap.js')
 myList = new LinkedList();
 myList.append("cat");
 myList.append("dog");

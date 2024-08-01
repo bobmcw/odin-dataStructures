@@ -1,5 +1,5 @@
 const LinkedList = require("./linkedList.js");
-class hashmap {
+module.exports = class hashmap {
   constructor(load_factor, capacity = 16) {
     this.load_factor = load_factor;
     this.buckets = [];

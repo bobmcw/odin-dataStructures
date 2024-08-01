@@ -248,6 +248,14 @@ class BinaryTree {
     })
     return balanced
 }
+rebalance(){
+    const elements = []
+    this.levelOrder((element)=>{
+        elements.push(element.value)
+    })
+    const newTree = new BinaryTree(elements)
+    this.root = newTree.root
+}
 }
 const myTree = new BinaryTree([45, 13, 5, 20, 7, 19, 9]);
 
@@ -278,7 +286,10 @@ myTree.postOrder((element)=>{
 console.log(myTree.isBalanced())
 myTree.insert(100);
 myTree.insert(101);
-myTree.insert(102);
+myTree.insert(201);
 prettyPrint(myTree.root)
 console.log(myTree.isBalanced())
 console.log(myTree.height(7))
+myTree.rebalance()
+prettyPrint(myTree.root)
+console.log(myTree.isBalanced())

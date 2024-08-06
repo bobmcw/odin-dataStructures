@@ -55,7 +55,25 @@ class chessGraph{
         });
         return list
     }
+    knightMoves(origin,destination){
+       const list = this.getAdjencyList()
+        const originSpace = origin[0]*8 + origin[1]
+        const destinationSpace = destination[0]*8 + destination[1]
+        function BFS(queue = [originSpace],path = []){
+            if(queue[0] === destinationSpace){return path}
+            queue.forEach(element => {
+               path.push(element)
+                   list[element].forEach(edge => {
+                    queue.push(edge) 
+                   }); 
+               queue.shift()
+               return BFS(queue,path)
+            });
+        }
+        return BFS()
+    }
 }
 const test = new chessGraph()
 //console.log(test.getBoard())
 console.log(test.getAdjencyList())
+console.log(test.knightMoves([0,0],[1,2]))

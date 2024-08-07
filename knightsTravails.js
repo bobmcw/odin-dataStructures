@@ -60,15 +60,18 @@ class chessGraph{
         const originSpace = origin[0]*8 + origin[1]
         const destinationSpace = destination[0]*8 + destination[1]
         function BFS(queue = [originSpace],path = []){
-            if(queue[0] === destinationSpace){return path}
-            queue.forEach(element => {
-               path.push(element)
-                   list[element].forEach(edge => {
-                    queue.push(edge) 
-                   }); 
-               queue.shift()
-               return BFS(queue,path)
+            while(true){
+            if(queue[0] === destinationSpace){
+                path.push(queue[0])
+                return path
+            }
+            list[queue[0]].forEach(edge => {
+               queue.push(edge) 
             });
+            path.push(queue[0])
+            queue.shift()
+               return BFS(queue,path)
+            }
         }
         return BFS()
     }
@@ -76,4 +79,4 @@ class chessGraph{
 const test = new chessGraph()
 //console.log(test.getBoard())
 console.log(test.getAdjencyList())
-console.log(test.knightMoves([0,0],[1,2]))
+console.log(test.knightMoves([0,0],[3,3]))

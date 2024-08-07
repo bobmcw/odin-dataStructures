@@ -73,10 +73,25 @@ class chessGraph{
                return BFS(queue,path)
             }
         }
-        return BFS()
+        const moves = BFS()
+        const path = []
+        let current = moves[moves.length-1]
+        path.push(current)
+        for(let i=moves.length-1;i>=0;i--){
+            if(list[current].includes(moves[i])){
+                path.push(moves[i])
+                current = moves[i]
+            }
+        }
+        const inOrder = path.reverse()
+        const board = this.getBoard()
+        console.log(`made it in ${inOrder.length-1} moves. Here is your path:`)
+        inOrder.forEach(space => {
+           console.log(board[space]) 
+        });
     }
 }
 const test = new chessGraph()
 //console.log(test.getBoard())
-console.log(test.getAdjencyList())
-console.log(test.knightMoves([0,0],[3,3]))
+//console.log(test.getAdjencyList())
+test.knightMoves([3,3],[4,3])
